@@ -1,11 +1,12 @@
 package com.example.demo;
 
 import com.example.demo.dto.InputDto;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import static com.example.demo.GameEngine.playGameForCash;
 import static com.example.demo.GameEngine.playGameForFreeRound;
 
+@Component
 public class RegularGame implements GameServiceStrategy {
 
     private final GameRepository gameRepository;

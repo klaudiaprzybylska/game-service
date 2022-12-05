@@ -13,5 +13,5 @@ public class SummaryDto {
 
     private Boolean isFreeRoundWon;
 
-    private int prize;
+    private float prize;
 }
