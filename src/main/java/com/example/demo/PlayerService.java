@@ -18,21 +18,11 @@ public class PlayerService {
         return playerRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Player with id " + id + " not found"));
     }
 
-    public void updateAfterGame(int newBalance, boolean freeGame, Long id) {
+    public void updateAfterGame(float newBalance, boolean freeGame, Long id) {
         Player player = getPlayerById(id);
         player.setBalance(newBalance);
         player.setIsNextRoundFree(freeGame);
         playerRepository.save(player);
-    }
-
-    public PlayerDto showBalance(Long playerId) {
-        Player player = getPlayerById(playerId);
-        return PlayerDto.builder()
-                .balance(player.getBalance())
-                .playerId(playerId)
-                .name(player.getName())
-                .isNextFree(player.getIsNextRoundFree())
-                .build();
     }
 
     public Player createPlayer() {

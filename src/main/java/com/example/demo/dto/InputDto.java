@@ -1,7 +1,12 @@
 package com.example.demo.dto;
 
+import com.example.demo.GameType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter
@@ -9,8 +14,12 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class InputDto {
-    private int bet;
+
+    @Min(1)
+    @Max(10)
+    private float bet;
+
     private Long playerId;
-    @JsonProperty(value = "isFree")
-    private boolean isFree;
+
+    private GameType gameType;
 }

@@ -12,11 +12,15 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class Player {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
-    private int balance;
+
+    private float balance;
+
     private Boolean isNextRoundFree;
 
     @OneToMany(mappedBy = "player")

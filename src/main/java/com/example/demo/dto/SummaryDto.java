@@ -8,7 +8,10 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class SummaryDto {
-    private Integer newBalance;
+
+    private float balance;
+
     private Boolean isFreeRoundWon;
-    private Integer prize;
+
+    private int prize;
 }

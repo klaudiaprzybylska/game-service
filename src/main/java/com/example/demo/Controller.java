@@ -3,7 +3,11 @@ package com.example.demo;
 import com.example.demo.dto.InputDto;
 import com.example.demo.dto.PlayerDto;
 import com.example.demo.dto.SummaryDto;
+import org.modelmapper.ModelMapper;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/")
@@ -11,23 +15,26 @@ public class Controller {
 
     private final GameService gameService;
     private final PlayerService playerService;
+    private static final ModelMapper mapper = new ModelMapper();
 
     public Controller(GameService gameService, PlayerService playerService) {
         this.gameService = gameService;
         this.playerService = playerService;
     }
 
-    @GetMapping("/balance/{playerId}")
-    public PlayerDto showBalance(@PathVariable Long playerId) {
-        return playerService.showBalance(playerId);
+    @GetMapping("/player/{playerId}")
+    public PlayerDto getPlayer(@PathVariable Long playerId) {
+        Player player = playerService.getPlayerById(playerId);
+        return mapper.map(player, PlayerDto.class);
     }
 
-    @PostMapping("/play")
-    public SummaryDto playGame(@RequestBody InputDto input) {
-        return gameService.playGame(input);
+    @PostMapping("/game")
+    public SummaryDto playGame(@Valid @RequestBody InputDto input) {
+        Game game = gameService.play(input);
+        return mapper.map(game, SummaryDto.class);
     }
 
-    @GetMapping("/newPlayer")
+    @PostMapping("/player")
     public Player createPlayer() {
         return playerService.createPlayer();
     }
