@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -15,7 +16,7 @@ public class InputDto {
 
     @Min(1)
     @Max(10)
-    private float bet;
+    private BigDecimal bet;
 
     private Long playerId;
 

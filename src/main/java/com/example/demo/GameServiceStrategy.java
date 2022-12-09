@@ -8,11 +8,10 @@ public interface GameServiceStrategy {
 
     Game createGame(InputDto input, Player player);
 
-    Player getPlayerById(Long playerId);
-
-    // todo validate if player has enough money to make bet
+    // todo validate if player has enough money to make a bet
 
     void updateBalance(Player player, Game game);
 
+    GameType getType();
 
 }

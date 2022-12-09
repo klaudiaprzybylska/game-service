@@ -13,22 +13,24 @@ public class RegularGame implements GameServiceStrategy {
 
     private final PlayerService playerService;
 
+    private final GameType type = GameType.REGULAR;
+
     public RegularGame(GameRepository gameRepository, PlayerService playerService) {
         this.gameRepository = gameRepository;
         this.playerService = playerService;
     }
 
     @Override
-    public Game playGame(InputDto input) {
-        Player player = getPlayerById(input.getPlayerId());
-        Game game = createGame(input, player);
-        updateBalance(player, game);
-        return game;
+    public GameType getType() {
+        return type;
     }
 
     @Override
-    public Player getPlayerById(Long playerId) {
-        return playerService.getPlayerById(playerId);
+    public Game playGame(InputDto input) {
+        Player player = playerService.getPlayerById(input.getPlayerId());
+        Game game = createGame(input, player);
+        updateBalance(player, game);
+        return game;
     }
 
     @Override

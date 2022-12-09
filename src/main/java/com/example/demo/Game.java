@@ -3,6 +3,7 @@ package com.example.demo;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @AllArgsConstructor
@@ -16,9 +17,9 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private float bet;
+    private BigDecimal bet;
 
-    private float prize;
+    private BigDecimal prize;
 
     private Boolean isFreeRoundWon;
 

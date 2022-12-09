@@ -4,6 +4,7 @@ import com.example.demo.dto.InputDto;
 import com.example.demo.dto.PlayerDto;
 import com.example.demo.dto.SummaryDto;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -30,7 +31,11 @@ public class Controller {
     @PostMapping("/game")
     public SummaryDto playGame(@Valid @RequestBody InputDto input) {
         Game game = gameService.play(input);
-        // todo
+
+        TypeMap<Game, SummaryDto> propertyMapper = mapper.createTypeMap(Game.class, SummaryDto.class);
+        propertyMapper.addMappings(
+                mapper -> mapper.map(src -> src.getPlayer().getBalance(), SummaryDto::setBalance)
+        );
         return mapper.map(game, SummaryDto.class);
     }
 

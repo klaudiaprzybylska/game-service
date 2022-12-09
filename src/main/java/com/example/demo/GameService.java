@@ -6,18 +6,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class GameService {
 
-    private GameServiceStrategy strategy;
+    private final GameServiceStrategyFactory factory;
 
-    private final RegularGame regularGame;
 
-    public GameService(RegularGame regularGame) {
-        this.regularGame = regularGame;
+    public GameService(GameServiceStrategyFactory factory) {
+        this.factory = factory;
     }
 
     Game play(InputDto inputDto) {
-        if (inputDto.getGameType().equals(GameType.REGULAR)) {
-            this.strategy = regularGame;
-        }
+        GameServiceStrategy strategy = factory.getStrategy(inputDto.getGameType());
+
         return strategy.playGame(inputDto);
     }
 }
