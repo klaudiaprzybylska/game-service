@@ -1,8 +1,10 @@
-package com.example.demo;
+package com.example.demo.player;
 
+import com.example.demo.game.Game;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -19,7 +21,7 @@ public class Player {
 
     private String name;
 
-    private float balance;
+    private BigDecimal balance;
 
     private Boolean isNextRoundFree;
 

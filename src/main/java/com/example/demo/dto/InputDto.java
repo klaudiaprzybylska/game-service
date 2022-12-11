@@ -1,6 +1,6 @@
 package com.example.demo.dto;
 
-import com.example.demo.GameType;
+import com.example.demo.game.GameType;
 import lombok.*;
 
 import javax.validation.constraints.Max;

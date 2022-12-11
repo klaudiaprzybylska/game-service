@@ -2,6 +2,8 @@ package com.example.demo.dto;
 
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,7 +15,7 @@ public class PlayerDto {
 
     private String name;
 
-    private float balance;
+    private BigDecimal balance;
 
     private boolean isNextFree;
 }

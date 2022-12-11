@@ -2,6 +2,8 @@ package com.example.demo.dto;
 
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -9,9 +11,9 @@ import lombok.*;
 @Builder
 public class SummaryDto {
 
-    private float balance;
+    private BigDecimal balance;
 
     private Boolean isFreeRoundWon;
 
-    private float prize;
+    private BigDecimal prize;
 }

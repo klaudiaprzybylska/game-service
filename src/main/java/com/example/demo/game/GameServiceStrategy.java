@@ -1,14 +1,13 @@
-package com.example.demo;
+package com.example.demo.game;
 
 import com.example.demo.dto.InputDto;
+import com.example.demo.player.Player;
 
 public interface GameServiceStrategy {
 
     Game playGame(InputDto input);
 
     Game createGame(InputDto input, Player player);
-
-    // todo validate if player has enough money to make a bet
 
     void updateBalance(Player player, Game game);
 

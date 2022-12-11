@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.player;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

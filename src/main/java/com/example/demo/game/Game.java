@@ -1,5 +1,6 @@
-package com.example.demo;
+package com.example.demo.game;
 
+import com.example.demo.player.Player;
 import lombok.*;
 
 import javax.persistence.*;

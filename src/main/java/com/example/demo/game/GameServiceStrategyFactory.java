@@ -1,8 +1,7 @@
-package com.example.demo;
+package com.example.demo.game;
 
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component

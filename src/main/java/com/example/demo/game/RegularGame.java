@@ -1,10 +1,11 @@
-package com.example.demo;
+package com.example.demo.game;
 
 import com.example.demo.dto.InputDto;
+import com.example.demo.player.Player;
+import com.example.demo.player.PlayerService;
 import org.springframework.stereotype.Component;
 
-import static com.example.demo.GameEngine.playGameForCash;
-import static com.example.demo.GameEngine.playGameForFreeRound;
+import java.math.BigDecimal;
 
 @Component
 public class RegularGame implements GameServiceStrategy {
@@ -13,7 +14,7 @@ public class RegularGame implements GameServiceStrategy {
 
     private final PlayerService playerService;
 
-    private final GameType type = GameType.REGULAR;
+    private static final GameType type = GameType.REGULAR;
 
     public RegularGame(GameRepository gameRepository, PlayerService playerService) {
         this.gameRepository = gameRepository;
@@ -30,27 +31,18 @@ public class RegularGame implements GameServiceStrategy {
         Player player = playerService.getPlayerById(input.getPlayerId());
         Game game = createGame(input, player);
         updateBalance(player, game);
+
         return game;
     }
 
     @Override
     public Game createGame(InputDto input, Player player) {
-        Game game = Game.builder()
-                .bet(input.getBet())
-                .prize(playGameForCash(input.getBet()))
-                .player(player)
-                .isFree(false)
-                .isFreeRoundWon(playGameForFreeRound())
-                .build();
-        return gameRepository.save(game);
+        return gameRepository.save(GameEngine.createGame(input.getBet(), false, player));
     }
 
     @Override
     public void updateBalance(Player player, Game game) {
-        float balance = player.getBalance();
-        float prize = game.getPrize();
-        balance += prize;
-        balance -= game.getBet();
+        BigDecimal balance = GameEngine.updateBalance(player.getBalance(), game, getType());
         boolean isNextGameFree = game.getIsFreeRoundWon();
         playerService.updateAfterGame(balance, isNextGameFree, player.getId());
     }
