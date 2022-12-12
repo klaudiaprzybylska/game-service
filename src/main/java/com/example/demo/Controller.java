@@ -24,21 +24,23 @@ public class Controller {
     public Controller(GameService gameService, PlayerService playerService) {
         this.gameService = gameService;
         this.playerService = playerService;
+
+        TypeMap<Game, SummaryDto> propertyMapper = mapper.createTypeMap(Game.class, SummaryDto.class);
+        propertyMapper.addMappings(
+                mapper -> mapper.map(src -> src.getPlayer().getBalance(), SummaryDto::setBalance)
+        );
     }
 
     @GetMapping("/player/{playerId}")
     public PlayerDto getPlayer(@PathVariable Long playerId) {
         Player player = playerService.getPlayerById(playerId);
+
         return mapper.map(player, PlayerDto.class);
     }
 
     @PostMapping("/game")
     public SummaryDto playGame(@Valid @RequestBody InputDto input) {
         Game game = gameService.play(input);
-        TypeMap<Game, SummaryDto> propertyMapper = mapper.createTypeMap(Game.class, SummaryDto.class);
-        propertyMapper.addMappings(
-                mapper -> mapper.map(src -> src.getPlayer().getBalance(), SummaryDto::setBalance)
-        );
 
         return mapper.map(game, SummaryDto.class);
     }
