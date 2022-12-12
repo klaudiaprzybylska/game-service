@@ -18,10 +18,10 @@ public class GameEngine {
         int cashRoll = random.nextInt(10);
 
         return switch (cashRoll) {
-            case 1 -> bet.multiply(BigDecimal.valueOf(3));
-            case 2 -> bet.multiply(BigDecimal.valueOf(10));
-            case 3 -> bet.multiply(BigDecimal.valueOf(50));
-            default -> BigDecimal.valueOf(0);
+            case 1 -> bet.multiply(new BigDecimal("3"));
+            case 2 -> bet.multiply(new BigDecimal("10"));
+            case 3 -> bet.multiply(new BigDecimal("50"));
+            default -> new BigDecimal("0");
         };
     }
 
