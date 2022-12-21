@@ -14,9 +14,12 @@ public class FreeGame implements GameServiceStrategy {
 
     private final PlayerService playerService;
 
-    public FreeGame(GameRepository gameRepository, PlayerService playerService) {
+    private final GameEngine gameEngine;
+
+    public FreeGame(GameRepository gameRepository, PlayerService playerService, GameEngine gameEngine) {
         this.gameRepository = gameRepository;
         this.playerService = playerService;
+        this.gameEngine = gameEngine;
     }
 
     @Override
@@ -35,12 +38,12 @@ public class FreeGame implements GameServiceStrategy {
 
     @Override
     public Game createGame(InputDto input, Player player) {
-        return gameRepository.save(GameEngine.createGame(input.getBet(), true, player));
+        return gameRepository.save(gameEngine.createGame(input.getBet(), true, player));
     }
 
     @Override
     public void updateBalance(Player player, Game game) {
-        BigDecimal balance = GameEngine.updateBalance(player.getBalance(), game, getType());
+        BigDecimal balance = gameEngine.updateBalance(player.getBalance(), game, getType());
         boolean isNextGameFree = game.getIsFreeRoundWon();
         playerService.updateAfterGame(balance, isNextGameFree, player.getId());
     }

@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import com.example.demo.CorrectBetRange;
 import com.example.demo.game.GameType;
 import lombok.*;
 
@@ -14,8 +15,7 @@ import java.math.BigDecimal;
 @Builder
 public class InputDto {
 
-    @Min(1)
-    @Max(10)
+    @CorrectBetRange
     private BigDecimal bet;
 
     private Long playerId;

@@ -14,11 +14,14 @@ public class RegularGame implements GameServiceStrategy {
 
     private final PlayerService playerService;
 
+    private final GameEngine gameEngine;
+
     private static final GameType type = GameType.REGULAR;
 
-    public RegularGame(GameRepository gameRepository, PlayerService playerService) {
+    public RegularGame(GameRepository gameRepository, PlayerService playerService, GameEngine gameEngine) {
         this.gameRepository = gameRepository;
         this.playerService = playerService;
+        this.gameEngine = gameEngine;
     }
 
     @Override
@@ -37,12 +40,12 @@ public class RegularGame implements GameServiceStrategy {
 
     @Override
     public Game createGame(InputDto input, Player player) {
-        return gameRepository.save(GameEngine.createGame(input.getBet(), false, player));
+        return gameRepository.save(gameEngine.createGame(input.getBet(), false, player));
     }
 
     @Override
     public void updateBalance(Player player, Game game) {
-        BigDecimal balance = GameEngine.updateBalance(player.getBalance(), game, getType());
+        BigDecimal balance = gameEngine.updateBalance(player.getBalance(), game, getType());
         boolean isNextGameFree = game.getIsFreeRoundWon();
         playerService.updateAfterGame(balance, isNextGameFree, player.getId());
     }
