@@ -19,7 +19,21 @@ public class BetValidator implements ConstraintValidator<CorrectBetRange, BigDec
 
     @Override
     public boolean isValid(BigDecimal bet, ConstraintValidatorContext constraintValidatorContext) {
-        return nonNull(bet) && bet.compareTo(new BigDecimal(gameProperties.getMaxBet())) < 1
-                && bet.compareTo(new BigDecimal(gameProperties.getMinBet())) >= 0;
+        constraintValidatorContext.disableDefaultConstraintViolation();
+
+        if (!nonNull(bet)) {
+            constraintValidatorContext.buildConstraintViolationWithTemplate("Value can't be null").addConstraintViolation();
+            return false;
+        } else if (bet.compareTo(new BigDecimal(gameProperties.getMinBet())) < 0) {
+            constraintValidatorContext.buildConstraintViolationWithTemplate("Value too small").addConstraintViolation();
+            return false;
+        } else if (bet.compareTo(new BigDecimal(gameProperties.getMaxBet())) >= 1) {
+            constraintValidatorContext.buildConstraintViolationWithTemplate("Value too big").addConstraintViolation();
+            return false;
+        }
+        return true;
+
+//        return nonNull(bet) && bet.compareTo(new BigDecimal(gameProperties.getMaxBet())) < 1
+//                && bet.compareTo(new BigDecimal(gameProperties.getMinBet())) >= 0;
     }
 }
