@@ -22,10 +22,11 @@ public class GameEngine {
     }
 
     private BigDecimal playGameForCash(BigDecimal bet) {
-        Map<String, String> map = gameProperties.getWins();
+        Map<Integer, BigDecimal> map = gameProperties.getWins();
         int cashRoll = random.nextInt(10);
 
-        return bet.multiply(new BigDecimal(map.getOrDefault(String.valueOf(cashRoll), "0")));
+        BigDecimal multiplicand = map.getOrDefault(cashRoll, BigDecimal.ZERO);
+        return bet.multiply(multiplicand);
     }
 
     private boolean playGameForFreeRound() {

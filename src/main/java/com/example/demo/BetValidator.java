@@ -24,10 +24,10 @@ public class BetValidator implements ConstraintValidator<CorrectBetRange, BigDec
         if (!nonNull(bet)) {
             constraintValidatorContext.buildConstraintViolationWithTemplate("Value can't be null").addConstraintViolation();
             return false;
-        } else if (bet.compareTo(new BigDecimal(gameProperties.getMinBet())) < 0) {
+        } else if (bet.compareTo(gameProperties.getMinBet()) < 0) {
             constraintValidatorContext.buildConstraintViolationWithTemplate("Value too small").addConstraintViolation();
             return false;
-        } else if (bet.compareTo(new BigDecimal(gameProperties.getMaxBet())) >= 1) {
+        } else if (bet.compareTo(gameProperties.getMaxBet()) >= 1) {
             constraintValidatorContext.buildConstraintViolationWithTemplate("Value too big").addConstraintViolation();
             return false;
         }

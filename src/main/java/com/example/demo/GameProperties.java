@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,12 +19,12 @@ import java.util.Map;
 public class GameProperties {
 
     @NotNull
-    private String minBet;
+    private BigDecimal minBet;
 
     @NotNull
-    private String maxBet;
+    private BigDecimal maxBet;
 
     @NotNull
-    private final Map<String, String> wins = new HashMap<>();
+    private final Map<Integer, BigDecimal> wins = new HashMap<>();
 
 }
