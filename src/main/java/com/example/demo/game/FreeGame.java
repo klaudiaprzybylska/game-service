@@ -43,7 +43,8 @@ public class FreeGame implements GameServiceStrategy {
 
     @Override
     public void updateBalance(Player player, Game game) {
-        BigDecimal balance = gameEngine.updateBalance(player.getBalance(), game, getType());
+        BigDecimal balance = player.getBalance();
+        balance = balance.add(game.getPrize());
         boolean isNextGameFree = game.getIsFreeRoundWon();
         playerService.updateAfterGame(balance, isNextGameFree, player.getId());
     }

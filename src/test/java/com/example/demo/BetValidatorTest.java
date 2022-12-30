@@ -9,7 +9,9 @@ import java.math.BigDecimal;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class BetValidatorTest {
 
@@ -36,6 +38,8 @@ class BetValidatorTest {
     public void isValidEdgeCases(BigDecimal bet, Boolean expected) {
         // given
         ConstraintValidatorContext constraintValidatorContext = mock(ConstraintValidatorContext.class);
+        ConstraintValidatorContext.ConstraintViolationBuilder constraintViolationBuilder = mock(ConstraintValidatorContext.ConstraintViolationBuilder.class);
+        when(constraintValidatorContext.buildConstraintViolationWithTemplate(anyString())).thenReturn(constraintViolationBuilder);
 
         // when
         Boolean actual = betValidator.isValid(bet, constraintValidatorContext);

@@ -14,11 +14,12 @@ public class GameEngine {
 
     private final GameProperties gameProperties;
 
-    private static final Random random = new Random();
+    private final Random random;
 
-    public GameEngine(GameProperties gameProperties) {
+    public GameEngine(GameProperties gameProperties, Random random) {
 //        throw new IllegalStateException();
         this.gameProperties = gameProperties;
+        this.random = random;
     }
 
     private BigDecimal playGameForCash(BigDecimal bet) {
@@ -33,13 +34,6 @@ public class GameEngine {
         int roundRoll = random.nextInt(10);
 
         return roundRoll == 1;
-    }
-
-    public BigDecimal updateBalance(BigDecimal balance, Game game, GameType type) {
-        return switch (type) {
-            case REGULAR -> balance.add(game.getPrize()).subtract(game.getBet());
-            case FREE -> balance.add(game.getPrize());
-        };
     }
 
     public Game createGame(BigDecimal bet, boolean isFree, Player player) {
