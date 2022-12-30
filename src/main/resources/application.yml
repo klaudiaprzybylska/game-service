@@ -1,0 +1,7 @@
+game:
+  minBet: 1
+  maxBet: 10
+  wins:
+    1: 3
+    2: 10
+    3: 50

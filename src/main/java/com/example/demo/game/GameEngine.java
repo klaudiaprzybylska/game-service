@@ -16,7 +16,7 @@ public class GameEngine {
 
     private static final Random random = new Random();
 
-    private GameEngine(GameProperties gameProperties) {
+    public GameEngine(GameProperties gameProperties) {
 //        throw new IllegalStateException();
         this.gameProperties = gameProperties;
     }
