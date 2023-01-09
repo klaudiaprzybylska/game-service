@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import javax.validation.ConstraintValidatorContext;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,7 +20,7 @@ class BetValidatorTest {
 
     private static final BigDecimal maxBet = new BigDecimal(10);
 
-    private final GameProperties gameProperties = new GameProperties(minBet, maxBet);
+    private final GameProperties gameProperties = new GameProperties(minBet, maxBet, new HashMap<>());
 
     private final BetValidator betValidator = new BetValidator(gameProperties);
 

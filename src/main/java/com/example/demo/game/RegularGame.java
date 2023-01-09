@@ -1,6 +1,7 @@
 package com.example.demo.game;
 
 import com.example.demo.dto.InputDto;
+import com.example.demo.exception.NotValidatedException;
 import com.example.demo.player.Player;
 import com.example.demo.player.PlayerService;
 import org.springframework.stereotype.Component;
@@ -40,6 +41,9 @@ public class RegularGame implements GameServiceStrategy {
 
     @Override
     public Game createGame(InputDto input, Player player) {
+        if(player.getBalance().compareTo(input.getBet()) < 0) {
+            throw new NotValidatedException("Insufficient funds");
+        }
         return gameRepository.save(gameEngine.createGame(input.getBet(), false, player));
     }
 

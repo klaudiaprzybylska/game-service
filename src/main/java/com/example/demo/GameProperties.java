@@ -29,6 +29,6 @@ public class GameProperties {
     private BigDecimal maxBet;
 
     @NotNull
-    private final Map<Integer, BigDecimal> wins = new HashMap<>();
+    private Map<Integer, BigDecimal> wins = new HashMap<>();
 
 }
